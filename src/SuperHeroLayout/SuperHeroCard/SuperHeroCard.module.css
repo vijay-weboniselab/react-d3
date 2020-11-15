@@ -1,0 +1,15 @@
+.superHeroContainer {
+    display: flex;
+}
+
+.propertyName{
+    display: inline-block;
+    width: 10vw;
+}
+.propertyValue {
+   width: 40%;
+}
+.imageHolder {
+    width: 40vw;
+    height: 100vh;
+}

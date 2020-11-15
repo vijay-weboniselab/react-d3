@@ -1,0 +1,1 @@
+export const BASE_URL = "https://superheroapi.com/api.php/3441310675917369/"
