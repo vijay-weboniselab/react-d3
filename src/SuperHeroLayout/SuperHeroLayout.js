@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import SuperHeroCard from "./SuperHeroCard/SuperHeroCard";
 import classes from "./SuperHeroLayout.module.css";
+import {Button } from '@material-ui/core'
 // import axios from "axios";
 import { BASE_URL } from "../api/endpoints";
 export default function SuperHeroLayout(props) {
@@ -8,7 +9,7 @@ export default function SuperHeroLayout(props) {
   const superHero1 = {
     response: "success",
     id: "10",
-    name: "Agent Bob",
+    name: "Agent Bob ",
     powerstats: {
       intelligence: "10",
       strength: "8",
@@ -46,48 +47,47 @@ export default function SuperHeroLayout(props) {
       url: "https://www.superherodb.com/pictures2/portraits/10/100/10255.jpg",
     },
   };
+  superHero && superHero.image ? (
+    <SuperHeroCard {...superHero} />
+  ) : (
+    <h3>Loading ...</h3>
+  );
+  useEffect(() => {
+    loadSuperHero();
+    return () => {};
+  }, []);
 
   const getRandomSup = (event) => {
-    event.preventDefault();
-    // axios(BASE_URL + Math.floor(Math.random() * 729), {
-    //   method: "GET",
-    //   mode : "no-cors",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Methods": "HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS",
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Headers":
-    //       "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Auth-Token",
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+    loadSuperHero();
+  };
 
-    // fetch
+  // load random superhero
+  function loadSuperHero() {
     const url = BASE_URL + Math.floor(Math.random() * 729);
-    fetch(
-      `https://api.allorigins.win/get?url=${encodeURIComponent(
-        url
-      )}`
-    )
+    fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error("Network response was not ok.");
       })
       .then((data) => {
-          console.log(data.contents);
-          setSuperHero(data.contents);
+        setSuperHero({ superHero, ...JSON.parse(data.contents) });
       });
-  };
+  }
 
+  let element =
+    superHero && superHero.image ? (
+      <SuperHeroCard {...superHero} />
+    ) : (
+      <h3>Loading ....</h3>
+    );
   return (
     <Fragment>
-      <button onClick={(event) => getRandomSup(event)}>
-        Random Super Hero
-      </button>
-      <SuperHeroCard {...superHero} />
+      <div className={classes.header}>
+        <Button color="primary" onClick={(event) => getRandomSup(event)}>
+          Random Super Hero
+        </Button>
+      </div>
+      {element}
     </Fragment>
   );
 }
