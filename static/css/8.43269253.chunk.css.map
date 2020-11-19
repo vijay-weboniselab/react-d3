@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/ChartsLayout/BarChart/BarChart.module.css"],"names":[],"mappings":"AAAA,IACI,eAAgB,CAChB,gBAAiB,CACjB,kBAAmB,CACnB,aACF","file":"8.43269253.chunk.css","sourcesContent":["svg {\n    background: #eee;\n    overflow: visible;\n    margin-bottom: 2rem;\n    display: block;\n  }"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["UsersLayout/UsersLayout.js"],"names":["UsersLayout"],"mappings":"mIAUeA,UARf,WACI,OACI","file":"static/js/8.7e357df2.chunk.js","sourcesContent":["import React from 'react'\n\nfunction UsersLayout() {\n    return (\n        <div>\n            \n        </div>\n    )\n}\n\nexport default UsersLayout\n"],"sourceRoot":""}
